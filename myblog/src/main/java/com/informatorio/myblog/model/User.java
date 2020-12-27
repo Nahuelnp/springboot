@@ -49,13 +49,6 @@ public class User implements Serializable {
     @Size(min = 3)
     private String country;
 
-    //  @CreationTimestamp
-//@JsonFormat(pattern = "dd-MM-yyyy")
-    //private Timestamp registDate;
-    /*@Column(updatable = false)
-    @JsonFormat(pattern = "dd-MM-yyyy")
-    @Temporal(TemporalType.DATE)
-    private Calendar registDate = Calendar.getInstance(TimeZone.getTimeZone("GMT-3"));*/
     
     @JsonFormat(pattern = "dd-MM-yyyy")
     @DateTimeFormat(pattern = "dd-MM-yyyy")

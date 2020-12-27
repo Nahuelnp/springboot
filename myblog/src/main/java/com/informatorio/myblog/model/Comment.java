@@ -23,7 +23,19 @@ public class Comment implements Serializable {
     @Column(updatable = false)
     @Temporal(TemporalType.DATE)
     private Calendar createdDate = Calendar.getInstance(TimeZone.getTimeZone("GMT-3"));
+    
+    @ManyToOne
+    @JoinColumn(referencedColumnName = "id")
+    private Post post;
 
+    public void setPost(Post post) {
+        this.post = post;
+    }
+
+    public Post getPost() {
+        return post;
+    }
+    
     @ManyToOne
     @JoinColumn(referencedColumnName = "id")
     private User user;

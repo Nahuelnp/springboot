@@ -41,6 +41,16 @@ public class PostController {
         return new ResponseEntity<>(postRepository.save(post), HttpStatus.CREATED);
     }
 
+    @GetMapping("/post/contain/{title}")
+    public ResponseEntity<?> getPOstTitle(@PathVariable String title) {
+        return new ResponseEntity<>(postRepository.findAllByTitleContaining(title), HttpStatus.OK);
+    }
+
+    @GetMapping("/post/published/{condition}")
+    public ResponseEntity<?> getPostPublished(@PathVariable Boolean condition) {
+        return new ResponseEntity<>(postRepository.findAllByPublishedIs(condition), HttpStatus.OK);
+    }
+
     //PUT para modificar un POST segun ID
     @PutMapping("/post/{post_id}")
     public ResponseEntity<?> editPost(@PathVariable Long post_id, @Valid @RequestBody Post post) {

@@ -3,8 +3,6 @@ package com.informatorio.myblog.controller;
 import com.informatorio.myblog.model.User;
 import com.informatorio.myblog.repository.UserRepository;
 import java.time.LocalDate;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +16,6 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin(origins = "*", methods = {RequestMethod.GET, RequestMethod.POST})
 public class UserController {
 
-    //private Map<Integer, String> postRepository = inicializarRepo();
     @Autowired
     private UserRepository userRepository;
 
@@ -34,24 +31,20 @@ public class UserController {
         return new ResponseEntity<>(userRepository.findById(id).get(), HttpStatus.OK);
     }
 
-    /* @GetMapping("/filter/{city}")
-    public List<User> getUserCity(@PathVariable String city) {
-        return userRepository.findAllByCity(city);
-    }*/
     @GetMapping("/filter/{city}")
     public ResponseEntity<?> getUserCity(@PathVariable String city) {
         return new ResponseEntity<>(userRepository.findAllByCity(city), HttpStatus.OK);
     }
 
     @GetMapping("/dateFilter/{date}")
-    public List<User> getUserDate(@PathVariable(value="date") @DateTimeFormat(pattern="dd-MM-yyyy") LocalDate date) {
+    public List<User> getUserDate(@PathVariable(value = "date") @DateTimeFormat(pattern = "dd-MM-yyyy") LocalDate date) {
         return userRepository.findAllByRegistDateIsAfter(date);
     }
 
     //Post Crear un Usuario
     @PostMapping
     public ResponseEntity<?> createUser(@RequestBody User user) {
-        return new ResponseEntity<>(userRepository.save(user), HttpStatus.CREATED);
+            return new ResponseEntity<>(userRepository.save(user), HttpStatus.CREATED);
     }
 
     @PutMapping("/{user_id}")
